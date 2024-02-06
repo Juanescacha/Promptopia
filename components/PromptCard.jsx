@@ -4,11 +4,11 @@ import { useState } from "react"
 import Image from "next/image"
 import { useSession } from "next-auth/react"
 import { usePathname, useRouter } from "next/navigation"
+import Link from "next/link"
 
 const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
 	const { data: session } = useSession()
 	const pathName = usePathname()
-	const router = useRouter()
 
 	const [copied, setCopied] = useState("")
 
@@ -20,10 +20,17 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
 		}, 3000)
 	}
 
+	const route =
+		post.creator._id === session?.user.id
+			? "/profile"
+			: `/profile/${post.creator._id}?name=${post.creator.username}`
+
 	return (
 		<div className="prompt_card">
 			<div className="flex justify-between items-start gap-5">
-				<div className="flex-1 flex justify-start items-center gap-3 cursor-pointer">
+				<Link
+					href={route}
+					className="flex-1 flex justify-start items-center gap-3 cursor-pointer">
 					<Image
 						src={post.creator.image}
 						alt="user_image"
@@ -39,7 +46,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
 							{post.creator.email}
 						</p>
 					</div>
-				</div>
+				</Link>
 				<div
 					className="copy_btn"
 					onClick={handleCopy}>
