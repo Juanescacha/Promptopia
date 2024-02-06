@@ -30,5 +30,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser.
 
 # Pending Features
 
--   Implement Click on Tag
 -   Implement Click on Username to View other profiles

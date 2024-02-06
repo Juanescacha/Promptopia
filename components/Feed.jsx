@@ -33,6 +33,10 @@ const Feed = () => {
 		e.preventDefault()
 	}
 
+	const handleTagClick = tag => {
+		setSearchText(tag)
+	}
+
 	useEffect(() => {
 		const fetchPosts = async () => {
 			const response = await fetch("/api/prompt")
@@ -77,7 +81,7 @@ const Feed = () => {
 			</form>
 			<PromptCardList
 				data={posts}
-				handleTagClick={() => {}}
+				handleTagClick={handleTagClick}
 			/>
 		</section>
 	)
